@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contact Form</title>
+</head>
+<body>
+    <h3>Hey there!!</h3>
+</body>
+<script>
+debugger;
+var data = new URLSearchParams();
+data.append('firstname', 'john');
+data.append('lastname', 'doe');
+data.append('gender', 'male');
+data.append('age', '32');
+data.append('email', 'xxxxxxx');
+data.append('phone', '34xxxxx');
+
+postData(`http://localhost:1234/api/contacts`, data)
+  .then(data => console.log(JSON.stringify(data))) 
+  .catch(error => console.error(error));
+
+function postData(url = ``, data) {
+    return fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        cache: "no-cache", 
+        credentials: "same-origin", 
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        redirect: "follow", 
+        referrer: "no-referrer", 
+        body: data,
+    })
+    .then(response => response.json());
+}
+</script>
+</html>
